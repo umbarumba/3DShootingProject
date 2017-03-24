@@ -9,20 +9,23 @@ public class Player : MonoBehaviour {
     public float RotationSpeed;
     private float AxisLR = 0f;
     //public GameObject BulletPrefab;
-    //public Transform Muzzle;
     //public float Gravity;
-    //private Rigidbody RB;
+    private Rigidbody RB;
+    public Vector3 PlayerVel;
 
 	// Use this for initialization
 	void Start () {
         //重力を強くする
         //Physics.gravity = new Vector3(0, Gravity * -1f, 0);
 
-        //RB = GetComponent<Rigidbody>();
+        RB = GetComponent<Rigidbody>();
+        
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+
+        PlayerVel = RB.velocity;
 
         AxisLR = 0;
         if (Input.GetButton("L1"))
@@ -36,10 +39,12 @@ public class Player : MonoBehaviour {
 
         float translationZ = Input.GetAxis("Vertical") * Speed;
         float translationX = Input.GetAxis("Horizontal") * Speed;
+        
         float rotation = AxisLR * RotationSpeed;
         translationZ *= Time.deltaTime;
         translationX *= Time.deltaTime;
         rotation *= Time.deltaTime;
+        PlayerVel = new Vector3(translationX, 0, translationZ).normalized;
         transform.Translate(translationX, 0, translationZ);
         transform.Rotate(0, rotation, 0);
 
@@ -47,12 +52,6 @@ public class Player : MonoBehaviour {
         //if (Input.GetKey(KeyCode.Space))
         //{
         //    RB.AddForce(transform.up * jumpforce);
-        //}
-
-        //弾の発射
-        //if (Input.GetKeyDown(KeyCode.Z))
-        //{
-        //    Instantiate(BulletPrefab, Muzzle.position, Muzzle.rotation);
         //}
 	}
 }

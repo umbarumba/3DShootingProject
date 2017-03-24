@@ -12,6 +12,9 @@ public class Target : MonoBehaviour {
     //private float AxisY;
 
     public GameObject BulletPrefab;
+    public GameObject TargetSprite;
+
+    RaycastHit hit;
 
 	// Use this for initialization
 	void Start () {
@@ -31,6 +34,17 @@ public class Target : MonoBehaviour {
         float RotationY = RotMaxY * AxisX;
 
         this.transform.localRotation = Quaternion.Euler(0, RotationY, 0f);
+
+        Ray ray = new Ray(transform.position, transform.forward);
+        if (Physics.Raycast(ray, out hit, 10.0f))
+        {
+            Debug.Log("HIT" + hit.point);
+            TargetSprite.transform.position = hit.point;
+        }
+        else
+        {
+            TargetSprite.transform.localPosition = new Vector3 (0f, 0f, 10f);
+        }
 
         if (Input.GetButton("R2"))
         {

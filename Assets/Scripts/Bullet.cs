@@ -5,14 +5,17 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
     private float T = 0.0f;
-    private float DeleteTime = 2.0f;
+    private float DeleteTime = 5.0f;
     private Rigidbody RB;
     private float speed = 1000;
+    private Player PlayerScript;
 
 	// Use this for initialization
 	void Start () {
 
+        PlayerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         RB = GetComponent<Rigidbody>();
+        RB.velocity = PlayerScript.PlayerVel;
         RB.AddForce(transform.forward * speed);
 		
 	}
