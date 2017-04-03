@@ -14,7 +14,7 @@ public class Target : MonoBehaviour {
     public GameObject BulletPrefab;
     public GameObject TargetSprite;
 
-    RaycastHit hit;
+    private RaycastHit hit;
 
 	// Use this for initialization
 	void Start () {
@@ -38,7 +38,7 @@ public class Target : MonoBehaviour {
         Ray ray = new Ray(transform.position, transform.forward);
         if (Physics.Raycast(ray, out hit, 10.0f))
         {
-            Debug.Log("HIT" + hit.point);
+            //Debug.Log("HIT" + hit.point);
             TargetSprite.transform.position = hit.point;
         }
         else

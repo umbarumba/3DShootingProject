@@ -38,9 +38,9 @@ public class Player : MonoBehaviour {
         }
 
         float translationZ = Input.GetAxis("Vertical") * Speed;
-        float translationX = Input.GetAxis("Horizontal") * Speed;
+        float rotation = Input.GetAxis("Horizontal") * RotationSpeed;
         
-        float rotation = AxisLR * RotationSpeed;
+        float translationX = AxisLR * Speed;
         translationZ *= Time.deltaTime;
         translationX *= Time.deltaTime;
         rotation *= Time.deltaTime;
